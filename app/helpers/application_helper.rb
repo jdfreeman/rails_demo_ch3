@@ -8,4 +8,5 @@ module ApplicationHelper
     end
 
     base_title
+  end
 end
