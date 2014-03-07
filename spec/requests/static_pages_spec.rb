@@ -6,7 +6,7 @@ describe "StaticPages" do
 
   shared_examples_for 'all static pages' do
     it { should have_selector 'h1' , text: heading }
-    it { should have_title(page_title) }
+    it { should have_title(full_title(page_title)) }
   end
 
   describe "Home Page" do
@@ -49,17 +49,16 @@ describe "StaticPages" do
   it "should have the correct links in the layout" do
     visit root_path
     click_link 'About'
-    expect(page).to have_title('About')
+    expect(page).to have_title(full_title('About'))
 
     click_link 'Help'
-    expect(page).to have_title('Help')
+    expect(page).to have_title(full_title('Help'))
 
     click_link 'Home'
-    expect(page).to have_title('')
+    expect(page).to have_title(full_title(''))
 
     click_link 'sample app'
-    expect(page).to have_title('')
+    expect(page).to have_title(full_title(''))
 
   end
-
 end
