@@ -3,16 +3,22 @@ require 'spec_helper'
 describe "StaticPages" do
 
   describe "Home Page" do
-    it "should have content 'Home'" do
+    it "should have content 'Sample App'" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      visit home_path
+      visit root_path
       expect(page) .to have_content('home')
     end
 
-    it "should have title 'Home'" do
+    it "should have the base title" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      visit home_path
-      expect(page) .to_not have_title('Home')
+      visit root_path
+      expect(page) .to have_title('Ruby on Rails Tutorial')
+    end
+
+    it "should not have the title 'Home'" do
+      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
+      visit root_path
+      expect(page) .to_not have_title('| Home')
     end
   end
 
