@@ -45,4 +45,24 @@ describe "StaticPages" do
 
     it_should_behave_like 'all static pages'
   end
+
+  it "should have the correct links in the layout" do
+    visit root_path
+    click_link 'About'
+    expect(page).to have_title('About')
+
+    click_link 'Help'
+    expect(page).to have_title('Help')
+
+    click link 'Home'
+    expect(page).to have_title('')
+
+    click link 'Sign Up Now!'
+    expect(page).to have_title('Sign Up')
+
+    click link 'sample app'
+    expect(page).to have_title('')
+
+  end
+
 end
