@@ -19,9 +19,9 @@ test:
   adapter: postgresql
   host: localhost
   port: 5433
-  username: ruby_tut_ch3
-  password: ruby_tut_ch3
-  database: ruby_tut_ch3
+  username: ruby_demo_test
+  password: GSINB2mPmrss6
+  database: ruby_demo_test
 
 production:
   adapter: postgresql
