@@ -57,9 +57,6 @@ describe "StaticPages" do
     click_link 'Home'
     expect(page).to have_title('')
 
-    click_link 'Sign Up Now!'
-    expect(page).to have_title('Sign Up')
-
     click_link 'sample app'
     expect(page).to have_title('')
 
