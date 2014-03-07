@@ -54,13 +54,13 @@ describe "StaticPages" do
     click_link 'Help'
     expect(page).to have_title('Help')
 
-    click link 'Home'
+    click_link 'Home'
     expect(page).to have_title('')
 
-    click link 'Sign Up Now!'
+    click_link 'Sign Up Now!'
     expect(page).to have_title('Sign Up')
 
-    click link 'sample app'
+    click_link 'sample app'
     expect(page).to have_title('')
 
   end
