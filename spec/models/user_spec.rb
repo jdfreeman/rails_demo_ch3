@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  before { @user = User.new(name: 'Example Name', email: 'Example Email')}
+  before { @user = User.new(name: 'Example Name', email: 'user@example.com')}
 
   subject { @user }
 
@@ -38,7 +38,7 @@ describe User do
 
   describe "when email is wellformed" do
     it "should be valid" do
-      addresses = %w[user@foo,com user_at_foo.org example.user@foo. foo@bar_baz.com foo@bar+baz.com]
+      addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
 
       addresses.each do | address |
        @user.email = address
