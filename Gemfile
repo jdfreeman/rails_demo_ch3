@@ -18,8 +18,6 @@ group :test do
   gem 'rspec-rails', '2.13.1'
   gem 'capybara', '2.1.0'
   gem 'libnotify', '0.8.0'
-
-
 end
 
 gem 'sass-rails', '4.0.1'
