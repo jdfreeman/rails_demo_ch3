@@ -62,6 +62,7 @@ GEM
       railties (>= 3.0.0)
     ffi (1.9.3)
     formatador (0.2.4)
+    growl (1.0.3)
     guard (2.5.1)
       formatador (>= 0.2.4)
       listen (~> 2.6)
@@ -130,6 +131,8 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.1.1)
+    rb-fchange (0.0.6)
+      ffi
     rb-fsevent (0.9.4)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
@@ -206,14 +209,18 @@ DEPENDENCIES
   childprocess (= 0.3.6)
   coffee-rails (= 4.0.1)
   factory_girl_rails (= 4.2.1)
+  growl
   guard-rspec (= 2.5.0)
   guard-spork (= 1.5.0)
   jbuilder (= 1.0.2)
   jquery-rails (= 3.0.4)
-  libnotify (= 0.8.0)
+  libnotify
   pg (= 0.15.1)
   rails (= 4.0.3)
   rails_12factor (= 0.0.2)
+  rb-fchange
+  rb-fsevent
+  rb-inotify
   rspec-rails (= 2.13.1)
   sass-rails (= 4.0.1)
   sdoc (= 0.3.20)
