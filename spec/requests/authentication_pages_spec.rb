@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe "Authentication" do
+describe "Authenticate by" do
 
   subject { page }
 
-  describe "sign in page" do
+  describe "signing in" do
 
     before { visit signin_path }
 
@@ -21,8 +21,8 @@ describe "Authentication" do
 
       before do
 
-        fill_in 'email', with: user.email
-        fill_in 'password', with: user.password
+        fill_in 'Email', with: user.email
+        fill_in 'Password', with: user.password
         click_button 'Sign in'
       end
 
