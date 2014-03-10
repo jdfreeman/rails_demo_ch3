@@ -105,4 +105,13 @@ describe User do
     it { should_not be_valid }
   end
 
+  describe "with a email stored is downcased" do
+    let(:mixed_case_email_address) { 'EXAMPLE@example.INfo' }
+
+    it "should have an equal value" do
+      @user.email = mixed_case_email_address
+      @user.save
+      expect(@user.email).to eq mixed_case_email_address.downcase
+    end
+  end
 end
