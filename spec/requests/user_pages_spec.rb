@@ -15,9 +15,9 @@ describe "User pages" do
   describe 'profile page' do
 
     let (:user) { FactoryGirl.create(:user) }
-    before { visit profile_path }
+    before { visit user_path(user) }
 
     it { should have_content(user.name) }
-    it { should have_content(user.email) }
+    it { should have_title(user.name) }
   end
 end
