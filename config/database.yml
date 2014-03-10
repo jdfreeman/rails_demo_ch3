@@ -7,9 +7,9 @@ development:
   adapter: postgresql
   host: localhost
   port: 5433
-  username: ruby_tut_ch3
-  password: ruby_tut_ch3
-  database: ruby_tut_ch3
+  username: ruby_demo_dev
+  password: lEtFgQNbkztxg
+  database: ruby_demo_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,6 +27,6 @@ production:
   adapter: postgresql
   host: localhost
   port: 5433
-  username: ruby_tut_ch3
-  password: ruby_tut_ch3
-  database: ruby_tut_ch3
+  username: ruby_demo_production
+  password: ruby_demo_production
+  database: ruby_demo_production
