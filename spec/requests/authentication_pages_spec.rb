@@ -37,7 +37,7 @@ describe "Testing authentication by" do
 
         before { click_link 'Sign out' }
 
-        it { should have_link 'Sign In' }
+        it { should have_link 'Sign in' }
       end
     end
   end
