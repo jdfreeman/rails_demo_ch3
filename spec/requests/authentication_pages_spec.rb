@@ -32,13 +32,13 @@ describe "Testing authentication by" do
       it { should have_link('Sign out', href: signout_path) }
       it { should have_link('Profile', href: user_path(user)) }
       it { should_not have_link('Sign In', href: signin_path) }
-    end
 
-    describe "followed by signing out"
+      describe "followed by signing out" do
 
-      before { click_link 'Sign out' }
+        before { click_link 'Sign out' }
 
-      it { should have_link 'Sign In' }
+        it { should have_link 'Sign In' }
+      end
     end
   end
 end
