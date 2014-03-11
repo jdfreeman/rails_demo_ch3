@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe 'Authentication' do
+describe 'Authentication process' do
 
   subject { page }
 
   before { visit signin_path }
 
-  context "when visiting the sing in page" do
+  context "when visiting the sign in page" do
     it "should have correct content" do
       expect(page).to have_content('Sign in')
       expect(page).to have_title('Sign in')

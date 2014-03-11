@@ -54,4 +54,24 @@ describe "User pages" do
     it { should have_title(user.name) }
   end
 
+  context "when editing user data" do
+
+    let(:user) { FactoryGirl.create(:user) }
+    before { visit edit_user_path(user) }
+
+    it "should display the correct content" do
+      expect(page).to have_content("Update your profile")
+      expect(page).to have_title("Edit user")
+      expect(page).to have_link('change', href: 'http://gravatar.com/emails')
+    end
+
+    context "with incorrect user data" do
+
+      before { click_button 'Save Changes' }
+
+      it "should display errors" do
+        expect(page).to have_error_message('error')
+      end
+    end
+  end
 end
