@@ -22,10 +22,10 @@ describe "User pages" do
 
       before do
 
-        fill_in "Name",         with: "Example User"
-        fill_in "Email",        with: "user@example.com"
-        fill_in "Password",     with: "foobar"
-        fill_in "Confirmation", with: "foobar"
+        fill_in "Name", with: "Example User"
+        fill_in "Email", with: "user@example.com"
+        fill_in "Password", with: "foobar"
+        fill_in "Confirm Password", with: "foobar"
       end
 
       it "should create a user" do
@@ -57,7 +57,10 @@ describe "User pages" do
   context "when editing user data" do
 
     let(:user) { FactoryGirl.create(:user) }
-    before { visit edit_user_path(user) }
+    before do
+      sign_in user
+      visit edit_user_path(user)
+    end
 
     it "should display the correct content" do
       expect(page).to have_content("Update your profile")
@@ -71,6 +74,31 @@ describe "User pages" do
 
       it "should display errors" do
         expect(page).to have_error_message('error')
+      end
+    end
+
+    context "with valid user data" do
+      let (:new_name) { "New Name" }
+      let (:new_email) { "new_email@example.com" }
+
+      before do
+
+        fill_in "Name", with: new_name
+        fill_in "Email", with: new_email
+        fill_in "Password", with: user.password
+        fill_in "Confirm Password", with: user.password
+        click_button "Save Changes"
+      end
+
+      it "should have the correct content" do
+        expect(page).to have_title(new_name)
+        expect(page).to have_success_message('Your profile has been successfully updated!')
+        expect(page).to have_link('Sign out', href: signout_path)
+      end
+
+      it "should update the model in the database" do
+        expect(user.reload.name).to eq new_name
+        expect(user.reload.email).to eq new_email
       end
     end
   end
