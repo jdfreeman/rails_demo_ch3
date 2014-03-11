@@ -1,43 +1,53 @@
 require 'spec_helper'
 
-describe "Testing authentication by" do
+describe 'Authentication' do
 
   subject { page }
 
-  describe "signing in" do
+  before { visit signin_path }
 
-    before { visit signin_path }
+  context "when visiting the sing in page" do
+    it "should have correct content" do
+      expect(page).to have_content('Sign in')
+      expect(page).to have_title('Sign in')
+    end
+  end
 
-    it { should have_content('Sign in')}
-    it { should have_title('Sign in')}
-
-    describe "with invalid login credentials" do
-
-      before { click_button 'Sign in' }
-      it { should have_selector('div.alert.alert-error') }
+  context "when authenticating with invalid credentials" do
+    before do
+      visit signin_path
+      click_button 'Sign in'
     end
 
-    describe "with valid login credentials" do
+    it "should display an error" do
+      expect(page).to have_error_message('Email or password invalid')
+    end
+  end
 
-      let(:user) { FactoryGirl.create(:user) }
+  context "when authenticating with valid credentials" do
 
-      before do
+    let(:user) { FactoryGirl.create(:user) }
 
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
-        click_button 'Sign in'
-      end
+    before do
 
-      it { should have_title(user.name) }
-      it { should have_link('Sign out', href: signout_path) }
-      it { should have_link('Profile', href: user_path(user)) }
-      it { should_not have_link('Sign In', href: signin_path) }
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Sign in'
+    end
 
-      describe "followed by signing out" do
+    it "should show the correct content" do
+      expect(page).to have_title(user.name)
+      expect(page).to have_link('Sign out', href: signout_path)
+      expect(page).to have_link('Profile', href: user_path(user))
+      expect(page).not_to have_link('Sign In', href: signin_path)
+    end
 
-        before { click_link 'Sign out' }
+    describe "followed by signing out" do
 
-        it { should have_link 'Sign in' }
+      before { click_link 'Sign out' }
+
+      it "should display the correct content" do
+        expect(page).to have_link 'Sign in'
       end
     end
   end
