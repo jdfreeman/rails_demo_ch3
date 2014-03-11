@@ -21,6 +21,7 @@ describe 'Editing user information' do
     before { visit edit_user_path(user) }
 
     it "should show the signin page" do
+      expect(page).to have_notice_message('Please log in')
       expect(page).to have_content('Sign in')
     end
 
