@@ -12,6 +12,8 @@ describe "Authenticate by" do
     it { should have_title('Sign in')}
 
     describe "with invalid login credentials" do
+
+      before { click_button 'Sign in' }
       it { should have_selector('div.alert.alert-error') }
     end
 

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
                     uniqueness: { case_senstive: false }
 
   before_save { self.email.downcase! }
+  before_create :create_remember_token
   has_secure_password
 
   validates :password, length: { minimum: 6 }
