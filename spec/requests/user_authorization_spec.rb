@@ -41,7 +41,7 @@ describe 'Editing user information' do
       before { get edit_user_path(wrong_user) }
 
       it 'should not have the "Edit" title' do
-        expect(page).not_to match(full_title('Edit user'))
+        expect(page).not_to have_title(full_title('Edit user'))
       end
 
       it 'should redirect to the root url' do
@@ -49,7 +49,7 @@ describe 'Editing user information' do
       end
 
       it 'should display an error message' do
-        expect(page).to have_error_message()
+        expect(flash[:notice]).to eq "You are not authorized to complete that action"
       end
     end
   end
