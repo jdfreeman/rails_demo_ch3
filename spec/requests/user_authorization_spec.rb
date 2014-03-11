@@ -6,7 +6,10 @@ describe 'Editing user information' do
 
   context 'when current user is authorized' do
 
-    before {visit edit_user_path(user) }
+    before do
+      sign_in user
+      visit edit_user_path(user)
+    end
 
     it 'should work' do
       expect(page).to have_content('Update your profile')
