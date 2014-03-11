@@ -1,4 +1,4 @@
-def sign_in(user)
+def sign_in(user, options={})
   if options[:no_capybara]
     remember_token = User.new_remember_token
     cookies[:remember_token] = remember_token
@@ -9,4 +9,7 @@ def sign_in(user)
     fill_in 'Password', with: user.password
     click_button 'Sign in'
   end
+end
+
+def sign_out()
 end
