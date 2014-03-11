@@ -115,4 +115,11 @@ describe User do
       expect(@user.email).to eq mixed_case_email_address.downcase
     end
   end
+
+  describe "remember token" do
+
+    before { @user.save }
+    its(:remember_token) { should_not be_blank }
+  end
+
 end
