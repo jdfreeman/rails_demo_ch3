@@ -14,4 +14,13 @@ describe Micropost do
   it "should respond to the :user_id attribute" do
     expect(@micropost).to respond_to(:user_id)
   end
+
+  context "when the user_id attribute is absent" do
+
+    before { @micropost.user_id = nil }
+
+    it "should not pass" do
+      expect(@micropost).not_to be_valid
+    end
+  end
 end
