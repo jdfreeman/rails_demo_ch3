@@ -173,7 +173,7 @@ describe "User pages" do
       end
 
       it "should not delete the user" do
-        expect(User.find(:non_admin_user_2)).not_to be_nil
+        expect(User.find(non_admin_user_2)).not_to be_nil
       end
 
       it "should redirect back to the root_url" do
