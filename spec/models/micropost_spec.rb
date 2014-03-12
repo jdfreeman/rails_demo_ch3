@@ -4,7 +4,7 @@ describe Micropost do
 
   let(:user) { FactoryGirl.create(:user) }
   before do
-    @micropost = Micropost.new(content: "Lorem ipsum", user_id: user.id)
+    @micropost = user.microposts.build(content: "Lorem ipsum")
   end
 
   it "should respond to the :content attribute" do
@@ -13,6 +13,14 @@ describe Micropost do
 
   it "should respond to the :user_id attribute" do
     expect(@micropost).to respond_to(:user_id)
+  end
+
+  it "should respond to the :user attribute" do
+    expect(@micropost).to respond_to(:user)
+  end
+
+  it "should have the correct user association" do
+    expect(user).to eq @micropost.user
   end
 
   context "when the user_id attribute is absent" do
