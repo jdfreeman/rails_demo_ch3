@@ -49,7 +49,6 @@ describe "User pages" do
 
     let (:user) { FactoryGirl.create(:user) }
     before { visit user_path(user) }
-    after(:all) { User.delete_all }
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
@@ -121,6 +120,7 @@ describe "User pages" do
     describe "pagination" do
 
       before(:all) { 30.times { FactoryGirl.create(:user) } }
+      after(:all) { User.delete_all }
 
       it "should have the correct selector" do
         expect(page).to have_selector('div.pagination')

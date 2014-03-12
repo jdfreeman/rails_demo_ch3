@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id]).destroy
+    @user = User.find(params[:id])
 
     if @user.update_attributes(user_params)
       flash[:success] = "Your profile has been successfully updated!"
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id]).delete
+    @user = User.find(params[:id]).destroy
 
     flash[:success] = "User '#{@user.name}' successfully deleted"
     redirect_to users_url
