@@ -158,5 +158,27 @@ describe "User pages" do
         expect(page).not_to have_link('delete', href: user_path(admin))
       end
     end
+
+    describe "as a non-admin user attempting to DELETE another user" do
+      let(:non_admin_user_1) { FactoryGirl.create(:user) }
+      let(:non_admin_user_2) { FactoryGirl.create(:user) }
+
+      before do
+        sign_in non_admin_user_1, no_capybara: true
+        delete user_path(non_admin_user_2)
+      end
+
+      it "should not change user count" do
+        expect { delete user_path(non_admin_user_2) }.not_to change(User, :count)
+      end
+
+      it "should not delete the user" do
+        expect(User.find(:non_admin_user_2)).not_to be_nil
+      end
+
+      it "should redirect back to the root_url" do
+        expect(page).to redirect_to(root_url)
+      end
+    end
   end
 end
