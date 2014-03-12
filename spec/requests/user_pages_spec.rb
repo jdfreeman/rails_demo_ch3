@@ -132,5 +132,34 @@ describe "User pages" do
         end
       end
     end
+
+    describe "delete links" do
+
+      it "should not display delete links if not an admin" do
+        expect(page).not_to have_link('delete')
+      end
+
+      describe "as an admin user" do
+
+        let(:admin) { FactoryGirl.create(:user) }
+
+        before do
+          sign_in admin
+          visit users_path
+        end
+
+        it "should display delete links" do
+          expect(page).to have_link('delete', href:user_path(User.first))
+        end
+
+        it "should be able to delete links" do
+          expect { click_link('delete', match: :first) }.to change(User, :count).by(-1)
+        end
+
+        it "should not have a delete link for self" do
+          expect(page).not_to have_link('delete', href: user_path(admin))
+        end
+      end
+    end
   end
 end
