@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, only: [:index, :edit, :update]
+  before_action :signed_in_user, only: [:index, :edit, :update, :delete]
   before_action :correct_user, only: [:edit, :update]
 
   def index
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]).destroy
 
     if @user.update_attributes(user_params)
       flash[:success] = "Your profile has been successfully updated!"
@@ -39,6 +39,13 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @user = User.find(params[:id]).delete
+
+    flash[:success] = "User '#{@user.name}' successfully deleted"
+    redirect_to users_url
   end
 
   private

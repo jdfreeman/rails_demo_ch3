@@ -49,6 +49,7 @@ describe "User pages" do
 
     let (:user) { FactoryGirl.create(:user) }
     before { visit user_path(user) }
+    after(:all) { User.delete_all }
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
@@ -56,7 +57,7 @@ describe "User pages" do
 
   context "when editing user data" do
 
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(:user, email: "Blerg@blerg.com") }
     before do
       sign_in user
       visit edit_user_path(user)
@@ -120,7 +121,6 @@ describe "User pages" do
     describe "pagination" do
 
       before(:all) { 30.times { FactoryGirl.create(:user) } }
-      after(:all) { User.delete_all }
 
       it "should have the correct selector" do
         expect(page).to have_selector('div.pagination')
@@ -133,32 +133,29 @@ describe "User pages" do
       end
     end
 
-    describe "delete links" do
+    it "should not display delete links if not an admin" do
+      expect(page).not_to have_link('delete')
+    end
 
-      it "should not display delete links if not an admin" do
-        expect(page).not_to have_link('delete')
+    describe "as an admin user" do
+
+      let(:admin) { FactoryGirl.create(:admin) }
+
+      before do
+        sign_in admin
+        visit users_path
       end
 
-      describe "as an admin user" do
+      it "should display delete links" do
+        expect(page).to have_link('delete', href:user_path(User.first))
+      end
 
-        let(:admin) { FactoryGirl.create(:user) }
+      it "should be able to delete links" do
+        expect { click_link('delete', match: :first) }.to change(User, :count).by(-1)
+      end
 
-        before do
-          sign_in admin
-          visit users_path
-        end
-
-        it "should display delete links" do
-          expect(page).to have_link('delete', href:user_path(User.first))
-        end
-
-        it "should be able to delete links" do
-          expect { click_link('delete', match: :first) }.to change(User, :count).by(-1)
-        end
-
-        it "should not have a delete link for self" do
-          expect(page).not_to have_link('delete', href: user_path(admin))
-        end
+      it "should not have a delete link for self" do
+        expect(page).not_to have_link('delete', href: user_path(admin))
       end
     end
   end
