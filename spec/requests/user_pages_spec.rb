@@ -181,4 +181,17 @@ describe "User pages" do
       end
     end
   end
+
+  context "when a user is a non-admin updating their admin property" do
+
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      sign_in user, no_capybara: true
+      patch user_path(user), { user: { admin: true } }
+    end
+
+    it "should not change" do
+      expect(user.reload).not_to eq true
+    end
+  end
 end
