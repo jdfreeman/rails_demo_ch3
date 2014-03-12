@@ -109,7 +109,7 @@ describe "User pages" do
       sign_in FactoryGirl.create(:user)
       FactoryGirl.create(:user, name: "Steve McTillituter", email: "steve@example.com")
       FactoryGirl.create(:user, name: "Ira Sockman", email: "irs.sockman@example.com")
-      visit user_path
+      visit users_path
     end
 
     it "should have the correct content" do
