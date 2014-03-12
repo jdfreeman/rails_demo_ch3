@@ -16,6 +16,7 @@ group :development, :test do
   gem 'rb-inotify', :require => false
   gem 'rspec-rails', '2.13.1'
   gem 'spork-rails', '4.0.0'
+  gem 'database_cleaner', '1.2.0'
 end
 
 group :test do
