@@ -53,7 +53,8 @@ describe 'Editing user information' do
 
     describe "visits user index" do
 
-      before { visit user_path }
+      before { get users_path }
+
       it 'should redirect to the signin page' do
         expect(page).to redirect_to(signin_path)
       end
