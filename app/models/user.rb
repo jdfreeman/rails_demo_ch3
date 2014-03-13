@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX } ,
                     uniqueness: { case_senstive: false }
 
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
   before_save { self.email.downcase! }
   before_create :create_remember_token
   has_secure_password
