@@ -5,7 +5,7 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
 
-    if @microposts.save
+    if @micropost.save
       flash[:success] = "Created a new micropost"
       redirect_to root_url
     else
@@ -15,6 +15,7 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
+    Micropost.find(micropost_params).delete
   end
 
 

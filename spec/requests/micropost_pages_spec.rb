@@ -11,13 +11,14 @@ describe "Micropost pages" do
     before { visit root_path }
 
     context "when data is invalid" do
+      before { click_button "Post" }
+
       it "should not create a post" do
-        expect{ click_button "Post" }.not_to change(Micropost, :count)
+        expect{ Micropost.count }.not_to change(Micropost, :count)
       end
 
       it "should display an error message" do
-        before { click_button "Post" }
-        expect{ page }.to have_content('error')
+        expect(page).to have_error_message('')
       end
     end
 
