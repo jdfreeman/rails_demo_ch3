@@ -15,7 +15,7 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-    Micropost.find(micropost_params).delete
+    Micropost.find(params[:id]).delete
   end
 
 

@@ -38,19 +38,15 @@ describe Micropost do
       end
     end
 
-    describe "deleting a micropost" do
-      before do
-        # count = Micropost.count
-        delete micropost_path(micropost)
-      end
+    # describe "deleting a micropost" do
 
-      it "should delete a micropost" do
-        expect{ Micropost.count }.to change(Micropost, :count).by(1)
-      end
+    #   it "should delete a micropost" do
+    #     expect{ delete micropost_path(micropost) }.to change(Micropost, :count).by(1)
+    #   end
 
-      it "should delete THE micropost" do
-        expect( Micropost.find(micropost) ).to be_nil
-      end
-    end
+    #   it "should delete THE micropost" do
+    #     expect( Micropost.find(micropost) ).to be_nil
+    #   end
+    # end
   end
 end

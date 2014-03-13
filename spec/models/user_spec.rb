@@ -14,6 +14,7 @@ describe User do
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:email) }
+  it { should respond_to(:feed) }
   it { should respond_to(:microposts) }
   it { should respond_to(:name) }
   it { should respond_to(:password) }
@@ -156,6 +157,16 @@ describe User do
       end
 
       expect(Micropost.where(user_id: @user.id)).to be_empty
+    end
+
+    describe "status" do
+      let(:unfollowed_post) { FactoryGirl.create(:micropost, user: FactoryGirl.create(:user)) }
+
+      it "should not display unfollowed posts" do
+        expect(:feed).to include(newer_micropost)
+        expect(:feed).to include(older_micropost)
+        expect(:feed).not_to include(unfollowed_post)
+      end
     end
   end
 end

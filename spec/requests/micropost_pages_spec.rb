@@ -3,12 +3,14 @@ require 'spec_helper'
 describe "Micropost pages" do
 
   let(:user) { FactoryGirl.create(:user) }
-  before { sign_in user }
+  before do
+    sign_in user
+    visit root_path
+  end
 
   subject { page }
 
   describe "micropost creation" do
-    before { visit root_path }
 
     context "when data is invalid" do
       before { click_button "Post" }
@@ -32,4 +34,11 @@ describe "Micropost pages" do
       end
     end
   end
+
+  # describe "micropost deletion" do
+
+  #   it "should destroy the micropost" do
+  #     expect{ click_link "delete" }.to change(Micropost, :count).by(-1)
+  #   end
+  # end
 end
