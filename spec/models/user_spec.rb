@@ -163,9 +163,9 @@ describe User do
       let(:unfollowed_post) { FactoryGirl.create(:micropost, user: FactoryGirl.create(:user)) }
 
       it "should not display unfollowed posts" do
-        expect(:feed).to include(newer_micropost)
-        expect(:feed).to include(older_micropost)
-        expect(:feed).not_to include(unfollowed_post)
+        expect(@user.feed).to include(newer_micropost)
+        expect(@user.feed).to include(older_micropost)
+        expect(@user.feed).not_to include(unfollowed_post)
       end
     end
   end
