@@ -35,10 +35,16 @@ describe "Micropost pages" do
     end
   end
 
-  # describe "micropost deletion" do
+  describe "micropost deletion" do
 
-  #   it "should destroy the micropost" do
-  #     expect{ click_link "delete" }.to change(Micropost, :count).by(-1)
-  #   end
-  # end
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      FactoryGirl.create(:micropost, user: user)
+      visit root_path
+    end
+
+    it "should destroy the micropost" do
+      expect{ click_link "delete" }.to change(Micropost, :count).by(-1)
+    end
+  end
 end

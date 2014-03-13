@@ -29,6 +29,7 @@ describe Micropost do
 
   context "when authenticated and authorized" do
     let(:micropost_2) { FactoryGirl.build(:micropost, user: user) }
+    before { sign_in user }
 
     describe "creating a micropost" do
       before { post microposts_path }
@@ -38,15 +39,22 @@ describe Micropost do
       end
     end
 
-    # describe "deleting a micropost" do
+    describe "deleting a micropost" do
 
-    #   it "should delete a micropost" do
-    #     expect{ delete micropost_path(micropost) }.to change(Micropost, :count).by(1)
-    #   end
+      let!(:micropost_3) { FactoryGirl.create(:micropost, user: user)}
+      let!(:count) { Micropost.count }
+      before do
+        sign_in user
+        delete micropost_path(micropost)
+      end
 
-    #   it "should delete THE micropost" do
-    #     expect( Micropost.find(micropost) ).to be_nil
-    #   end
-    # end
+      it "should delete a micropost" do
+        expect{ Mircopost.count }.to eq(count-1)
+      end
+
+      it "should delete THE micropost" do
+        expect( Micropost.find(micropost) ).to be_nil
+      end
+    end
   end
 end
