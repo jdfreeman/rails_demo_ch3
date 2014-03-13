@@ -37,7 +37,7 @@ describe Micropost do
     before { @micropost.content = ' '* Random.new.rand(1..100) }
 
     it "should not be valid" do
-        expect(@micropost).not_to be be_valid
+        expect(@micropost).not_to be_valid
     end
   end
 
