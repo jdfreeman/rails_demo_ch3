@@ -134,4 +134,16 @@ describe User do
       expect(@user).to be_admin
     end
   end
+
+  describe "micropost associations" do
+
+    before { @user.save }
+
+    let!(:older_micropost) { FactoryGirl.create(:micropost, user: @user, created_at: 1.month.ago)}
+    let!(:newer_micropost) { FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago)}
+
+    it "should have the right microposts in the correct order" do
+      expect(@user.microposts.to_a).to eq [newer_micropost, older_micropost]
+    end
+  end
 end
