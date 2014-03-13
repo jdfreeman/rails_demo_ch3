@@ -27,7 +27,25 @@ describe Micropost do
     end
   end
 
-  describe "creating a Micropost" do
+  context "when authenticated and authorized" do
+    let(:micropost_2) { FactoryGirl.build(:micropost, user: user) }
 
+    describe "creating a micropost" do
+      before { post microposts_path }
+
+      it "should store a new micropost" do
+        expect{ micropost_2 }.not_to be_nil
+      end
+    end
+
+    describe "deleting a micropost" do
+      it "should delete a micropost" do
+        expect{ delete micropost_path(micropost) }.to change(Micropost, :count).by(1)
+      end
+
+      it "should delete THE micropost" do
+        expect( Micropost.find(micropost) ).to be_nil
+      end
+    end
   end
 end
