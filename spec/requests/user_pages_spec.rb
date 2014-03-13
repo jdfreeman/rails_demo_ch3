@@ -52,6 +52,19 @@ describe "User pages" do
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
+
+    describe "microposts" do
+      let!(:m1) { FactoryGirl.create(:micropost, user: user, created_at: 1.month.ago)}
+      let!(:m2) { FactoryGirl.create(:micropost, user: user, created_at: 1.day.ago)}
+      before { visit user_path(user) }
+
+      it "should have micropost data" do
+        expect(page).to have_content(m1.content)
+        expect(page).to have_content(m2.content)
+        expect(page).to have_content(user.microposts.count)
+      end
+
+    end
   end
 
   context "when editing user data" do
