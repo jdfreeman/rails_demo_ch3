@@ -31,4 +31,22 @@ describe Micropost do
       expect(@micropost).not_to be_valid
     end
   end
+
+  context "when content is missing" do
+
+    before { @micropost.content = ' '* Random.new.rand(1..100) }
+
+    it "should not be valid" do
+        expect(@micropost).not_to be be_valid
+    end
+  end
+
+  context "when content is too long" do
+
+    before { @micropost.content = 'a' * 141 }
+
+    it "should not be valid" do
+      expect(@micropost).not_to be_valid
+    end
+  end
 end
